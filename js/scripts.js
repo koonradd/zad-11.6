@@ -71,7 +71,7 @@ $(function() {
         .addClass("btn-delete")
         .text("x");
 
-      $cardDelete.on(function() {
+      $cardDelete.on("click", function() {
         self.removeCard();
       });
 
