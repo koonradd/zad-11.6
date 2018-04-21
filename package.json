@@ -1,0 +1,57 @@
+{
+  "name": "zad-11.6",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts.js",
+  "scripts": {
+    "test": "npm run test:html && npm run test:js",
+    "test:html": "glob-run nu-html-checker *.html",
+    "test:js": "jshint --show-non-errors js",
+    "init-project":
+      "npm run init:mkdirp-install && npm run init:dirs && npm run init:files && npm run init:gitignore && npm run init:npm-install",
+    "init:dirs": "mkdirp sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:mkdirp-install": "npm install mkdirp",
+    "init:gitignore":
+      "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "init:npm-install": "npm install",
+    "build":
+      "npm run build:clean && npm run build:sass && npm run build:autoprefixer && npm run test",
+    "build:clean": "rimraf css/*",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build:sass:dev":
+      "node-sass --output-style expanded --source-map true -o css sass",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "watch":
+      "parallelshell  \"npm run watch:sassprefixer\" \"npm run watch:browser-sync\" ",
+    "watch:sassprefixer":
+      "onchange sass/*.scss -- parallelshell \"npm run build:sass\" \"npm run build:autoprefixer\" ",
+    "watch:browser-sync":
+      "browser-sync start --server --files \"css/*.css\" \"*.html\" --serveStatic \"./\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koonradd/zad-11.6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "browser-sync": "^2.18.13",
+    "glob-run": "^0.1.6",
+    "jshint": "^2.9.5",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "minimatch": "^3.0.2"
+  },
+  "bugs": {
+    "url": "https://github.com/koonradd/zad-11.6/issues"
+  },
+  "homepage": "https://github.com/koonradd/zad-11.6#readme"
+}
